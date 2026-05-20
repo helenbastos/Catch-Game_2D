@@ -382,7 +382,7 @@ void iniciarObjetos()
         objetos[i].y = altura + rand() % 600;
         objetos[i].velocidade = 2.0f + (rand() % 2);
         objetos[i].tipo = rand() % 4;
-        objetos[i].vermelho = (rand() % 100 < 40);
+        objetos[i].vermelho = (rand() % 100 < 60);
     }
 }
 
@@ -471,7 +471,7 @@ void atualizarObjetos()
     for (int i = 0; i < quantidadeObjetos; i++)
     {
        float dificuldade = 1.0f;
-        if (objetos[i].vermelho)
+        if (objetos[i].tipo == 0 && objetos[i].vermelho)
         {
             dificuldade += (pontos / 5) * 0.2f;
         }
@@ -480,7 +480,7 @@ void atualizarObjetos()
         // COLISÃO COM A BARRA        
         if (colidiu(objetos[i].x,objetos[i].y,35))
         {
-            if (objetos[i].vermelho)
+            if (objetos[i].tipo == 0 && objetos[i].vermelho)
             {
                 pontos++;
                 if (pontos > recordePessoal)
@@ -501,16 +501,13 @@ void atualizarObjetos()
             }
 
             objetos[i].tipo = rand() % 4;
-
-            
-            objetos[i].vermelho =
-                (rand() % 100 < 20);
+            objetos[i].vermelho = (rand() % 100 < 60);
         }
 
         // PASSOU DA TELA
         if (objetos[i].y < -50)
         {
-            if (objetos[i].vermelho)
+            if (objetos[i].tipo == 0 && objetos[i].vermelho)
             {
                 vidas--;
                 if (vidas <= 0) {
@@ -521,7 +518,8 @@ void atualizarObjetos()
             objetos[i].x =rand() % (largura - 50);
             objetos[i].y = altura + rand() % 300;
             objetos[i].tipo =rand() % 4;
-            objetos[i].vermelho = (rand() % 100 < 20);
+            objetos[i].vermelho = (rand() % 100 < 60);
+
             if (objetos[i].vermelho)
             {
                 objetos[i].velocidade = 2.0f + (rand() % 2);
@@ -633,7 +631,7 @@ void telaGameOver()
 
     glutSwapBuffers(); 
 
-
+}
 // DISPLAY
 void display()
 {
